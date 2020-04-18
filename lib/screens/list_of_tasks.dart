@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/components/tasks_list.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class ListOfTasks extends StatelessWidget {
   @override
@@ -53,7 +56,23 @@ class ListOfTasks extends StatelessWidget {
         Expanded(
           child: Container(
             // padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: TasksList(),
+            child: Provider.of<TaskData>(context, listen: true).taskCount <= 0
+                ? Container(
+                    margin: EdgeInsets.all(10.0),
+                    child: Center(
+                      child: TyperAnimatedTextKit(
+                        speed: Duration(milliseconds: 30),
+                        isRepeatingAnimation: false,
+                        text: [
+                          'All tasks completed! Add a new task by tapping on the + sign'
+                        ],
+                        textAlign: TextAlign.center,
+                        textStyle:
+                            TextStyle(fontSize: 30.0, color: Colors.white),
+                      ),
+                    ),
+                  )
+                : TasksList(),
             decoration: BoxDecoration(
               color: Color(0xFF222831),
               borderRadius: BorderRadius.only(

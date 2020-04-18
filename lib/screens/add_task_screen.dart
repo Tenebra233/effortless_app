@@ -41,114 +41,119 @@ class AddTaskScreen extends StatelessWidget {
             topRight: Radius.circular(20.0),
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                'Something to do?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 50.0,
-                  color: Colors.white,
-                ),
-              ),
-              TextField(
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFFF2A365))),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFFF2A365))),
-                  hintStyle: TextStyle(
+        child: GestureDetector(
+          onTap: (){
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  'Something to do?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 50.0,
                     color: Colors.white,
                   ),
-                  hintText: 'Type it there',
                 ),
-                textAlign: TextAlign.center,
-                autofocus: true,
-                controller: nameHolder,
-                onChanged: (newText) {
-                  newTaskTitle = newText;
-                },
-              ),
-              FlatButton(
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: Color(0xFFF2A365),
-                          width: 1,
-                          style: BorderStyle.solid),
-                      borderRadius: BorderRadius.circular(50)),
-                  color: Color(0xFFF2A365),
-                  onPressed: () {
-                    DatePicker.showTimePicker(context,
-                        showTitleActions: true,
-                        showSecondsColumn: false,
-                        onChanged: (time) {}, onConfirm: (time) {
-                      print('${time.hour}');
-                      print('${time.minute}');
-                      newHour = time.hour;
-                      newMinute = time.minute;
-                    }, currentTime: DateTime.now(), locale: LocaleType.en);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.access_time,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        'Pick time',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 20.0),
-              Column(
-                children: <Widget>[
-                  FlatButton(
-                    shape: CircleBorder(),
-                    child: Icon(
-                      Icons.add,
-                      size: 100.0,
+                TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFF2A365))),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFF2A365))),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
                     ),
+                    hintText: 'Type it there',
+                  ),
+                  textAlign: TextAlign.center,
+                  autofocus: true,
+                  controller: nameHolder,
+                  onChanged: (newText) {
+                    newTaskTitle = newText;
+                  },
+                ),
+                FlatButton(
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: Color(0xFFF2A365),
+                            width: 1,
+                            style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(50)),
                     color: Color(0xFFF2A365),
                     onPressed: () {
-                      FocusScopeNode currentFocus = FocusScope.of(context);
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
-                      }
-                      //Spammando l'add button viene subito generato un nuovo snackbar
-                      Scaffold.of(context).hideCurrentSnackBar();
-
-                      //Se non controllo che sia isEmpty aggiunge comunque una task vuota
-                      if (newTaskTitle == null || nameHolder.text.isEmpty) {
-                        Scaffold.of(context).showSnackBar(
-                            displaySnackbar(Icons.error_outline, Colors.red));
-                        return '';
-                      } else {
-                        Scaffold.of(context).showSnackBar(
-                            displaySnackbar(Icons.check, Colors.green));
-                      }
-
-                      Provider.of<TaskData>(context, listen: false).addTask(
-                        newTaskTitle == null ? '' : newTaskTitle,
-                        newHour,
-                        newMinute,
-                      );
-                      Provider.of<TaskData>(context, listen: false)
-                          .cleanInput(nameHolder);
-                      newTaskTitle = null;
+                      DatePicker.showTimePicker(context,
+                          showTitleActions: true,
+                          showSecondsColumn: false,
+                          onChanged: (time) {}, onConfirm: (time) {
+                        print('${time.hour}');
+                        print('${time.minute}');
+                        newHour = time.hour;
+                        newMinute = time.minute;
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
                     },
-                  ),
-                ],
-              ),
-            ],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.access_time,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          'Pick time',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
+                    )),
+                SizedBox(height: 20.0),
+                Column(
+                  children: <Widget>[
+                    FlatButton(
+                      shape: CircleBorder(),
+                      child: Icon(
+                        Icons.add,
+                        size: 100.0,
+                      ),
+                      color: Color(0xFFF2A365),
+                      onPressed: () {
+                        FocusScopeNode currentFocus = FocusScope.of(context);
+                        if (!currentFocus.hasPrimaryFocus) {
+                          currentFocus.unfocus();
+                        }
+                        //Spammando l'add button viene subito generato un nuovo snackbar
+                        Scaffold.of(context).hideCurrentSnackBar();
+
+                        //Se non controllo che sia isEmpty aggiunge comunque una task vuota
+                        if (newTaskTitle == null || nameHolder.text.isEmpty) {
+                          Scaffold.of(context).showSnackBar(
+                              displaySnackbar(Icons.error_outline, Colors.red));
+                          return '';
+                        } else {
+                          Scaffold.of(context).showSnackBar(
+                              displaySnackbar(Icons.check, Colors.green));
+                        }
+
+                        Provider.of<TaskData>(context, listen: false).addTask(
+                          newTaskTitle == null ? '' : newTaskTitle,
+                          newHour,
+                          newMinute,
+                        );
+                        Provider.of<TaskData>(context, listen: false)
+                            .cleanInput(nameHolder);
+                        newTaskTitle = null;
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
