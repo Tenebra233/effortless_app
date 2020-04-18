@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/components/animated_clock.dart';
+import 'package:todoey_flutter/components/animated_text.dart';
 import 'package:todoey_flutter/components/tasks_list.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:todoey_flutter/models/task_data.dart';
+import 'package:provider/provider.dart';
 
 class ListOfTasks extends StatelessWidget {
   @override
@@ -22,33 +27,7 @@ class ListOfTasks extends StatelessWidget {
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  // MaterialButton(
-                  //     shape: CircleBorder(),
-                  //     height: 50.0,
-                  //     color: Colors.white,
-                  //     elevation: 5.0,
-                  //     child: Icon(
-                  //       Icons.add,
-                  //       size: 40.0,
-                  //       color: Colors.lightBlueAccent,
-                  //     ),
-                  //     onPressed: () {
-                  //       showModalBottomSheet(
-                  //         context: context,
-                  //         isScrollControlled: true,
-                  //         builder: (context) => SingleChildScrollView(
-                  //           child: Container(
-                  //             padding: EdgeInsets.only(
-                  //                 bottom: MediaQuery.of(context)
-                  //                     .viewInsets
-                  //                     .bottom),
-                  //             child: AddTaskScreen(),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }),
-                ],
+                children: <Widget>[],
               ),
             ],
           ),
@@ -57,20 +36,16 @@ class ListOfTasks extends StatelessWidget {
           child: Container(
             // padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Provider.of<TaskData>(context, listen: true).taskCount <= 0
-                ? Container(
-                    margin: EdgeInsets.all(10.0),
-                    child: Center(
-                      child: TyperAnimatedTextKit(
-                        speed: Duration(milliseconds: 30),
-                        isRepeatingAnimation: false,
-                        text: [
-                          'All tasks completed! Add a new task by tapping on the + sign'
-                        ],
-                        textAlign: TextAlign.center,
-                        textStyle:
-                            TextStyle(fontSize: 30.0, color: Colors.white),
+                ? Column(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: Center(
+                          child: NoTasksAnimatedText(),
+                        ),
                       ),
-                    ),
+                      AnimatedClock(),
+                    ],
                   )
                 : TasksList(),
             decoration: BoxDecoration(

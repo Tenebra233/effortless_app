@@ -27,9 +27,17 @@ class TaskTile extends StatelessWidget {
       isTimePicked = true;
     }
     return Card(
+      elevation: 10.0,
       margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      color: Color(0xFF30475E),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30.0),
+          bottomRight: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+          topLeft: Radius.circular(30.0),
+        ),
+      ),
+      color: Color(0xFFF2A365),
       child: Dismissible(
         direction: DismissDirection.endToStart,
         background: Container(
@@ -58,22 +66,24 @@ class TaskTile extends StatelessWidget {
                     style: isChecked
                         ? TextStyle(
                             fontSize: 30.0,
-                            color: Colors.white70,
+                            color: Colors.black54,
                             decoration: TextDecoration.lineThrough,
                           )
                         : TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 30.0,
                             fontWeight: FontWeight.bold,
                           ),
                     child: Row(
                       children: <Widget>[
-                        FlareCheckbox(
-                          animation: 'assets/checked.flr',
-                          animationOn: 'on',
-                          animationOff: 'off',
-                          width: MediaQuery.of(context).size.width * 0.1,
-                          height: MediaQuery.of(context).size.height * 0.1,
+                        Checkbox(
+                          activeColor: Colors.black,
+                          checkColor: Colors.white,
+                          // animation: 'assets/checked.flr',
+                          // animationOn: 'on',
+                          // animationOff: 'off',
+                          // width: MediaQuery.of(context).size.width * 0.1,
+                          // height: MediaQuery.of(context).size.height * 0.1,
                           value: isChecked,
                           onChanged: checkboxCallback,
                         ),
@@ -93,12 +103,17 @@ class TaskTile extends StatelessWidget {
                               ),
                               Visibility(
                                 visible: isTimePicked,
-                                child: Text(
-                                  '${hour.toString()}:${minute.toString()}',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.access_time),
+                                    Text(
+                                      '${hour.toString()}:${minute.toString()}',
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

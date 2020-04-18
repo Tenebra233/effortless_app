@@ -88,6 +88,7 @@ class AddTaskScreen extends StatelessWidget {
                     onPressed: () {
                       DatePicker.showTimePicker(context,
                           showTitleActions: true,
+                          
                           showSecondsColumn: false,
                           onChanged: (time) {}, onConfirm: (time) {
                         print('${time.hour}');
