@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_flutter/components/animated_clock.dart';
 import 'package:todoey_flutter/components/animated_text.dart';
 import 'package:todoey_flutter/components/tasks_list.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_data.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:todoey_flutter/models/task_data.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class ListOfTasks extends StatelessWidget {
   @override
@@ -44,7 +42,8 @@ class ListOfTasks extends StatelessWidget {
                           child: NoTasksAnimatedText(),
                         ),
                       ),
-                      AnimatedClock(),
+                      Lottie.asset('assets/noTasks.json',
+                              width: 300.0, height: 300.0, repeat: true,),
                     ],
                   )
                 : TasksList(),

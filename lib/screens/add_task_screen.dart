@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_data.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -42,7 +43,7 @@ class AddTaskScreen extends StatelessWidget {
           ),
         ),
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusScope.of(context).requestFocus(new FocusNode());
           },
           child: SingleChildScrollView(
@@ -88,7 +89,6 @@ class AddTaskScreen extends StatelessWidget {
                     onPressed: () {
                       DatePicker.showTimePicker(context,
                           showTitleActions: true,
-                          
                           showSecondsColumn: false,
                           onChanged: (time) {}, onConfirm: (time) {
                         print('${time.hour}');
@@ -100,9 +100,10 @@ class AddTaskScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(
-                          Icons.access_time,
-                          color: Colors.black,
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: 40.0, maxWidth: 40.0),
+                          child: Lottie.asset('assets/timePicker.json',
+                              width: 60.0, height: 60.0, repeat: true),
                         ),
                         SizedBox(
                           width: 10.0,
@@ -118,10 +119,8 @@ class AddTaskScreen extends StatelessWidget {
                   children: <Widget>[
                     FlatButton(
                       shape: CircleBorder(),
-                      child: Icon(
-                        Icons.add,
-                        size: 100.0,
-                      ),
+                      child: Lottie.asset('assets/plus.json',
+                          width: 100.0, height: 100.0, repeat: false),
                       color: Color(0xFFF2A365),
                       onPressed: () {
                         FocusScopeNode currentFocus = FocusScope.of(context);

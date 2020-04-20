@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flare_checkbox/flare_checkbox.dart';
+import 'package:circular_check_box/circular_check_box.dart';
 
 class TaskTile extends StatelessWidget {
   final bool isChecked;
@@ -76,14 +76,8 @@ class TaskTile extends StatelessWidget {
                           ),
                     child: Row(
                       children: <Widget>[
-                        Checkbox(
+                        CircularCheckBox(
                           activeColor: Colors.black,
-                          checkColor: Colors.white,
-                          // animation: 'assets/checked.flr',
-                          // animationOn: 'on',
-                          // animationOff: 'off',
-                          // width: MediaQuery.of(context).size.width * 0.1,
-                          // height: MediaQuery.of(context).size.height * 0.1,
                           value: isChecked,
                           onChanged: checkboxCallback,
                         ),
@@ -105,7 +99,10 @@ class TaskTile extends StatelessWidget {
                                 visible: isTimePicked,
                                 child: Row(
                                   children: <Widget>[
-                                    Icon(Icons.access_time),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5.0),
+                                      child: Icon(Icons.access_time),
+                                    ),
                                     Text(
                                       '${hour.toString()}:${minute.toString()}',
                                       style: TextStyle(
