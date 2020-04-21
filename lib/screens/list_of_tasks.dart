@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/components/animated_text.dart';
+import 'package:todoey_flutter/components/motivation_quotes.dart';
 import 'package:todoey_flutter/components/tasks_list.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_data.dart';
-import 'package:todoey_flutter/models/task_data.dart';
-import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 
 class ListOfTasks extends StatelessWidget {
@@ -42,8 +41,14 @@ class ListOfTasks extends StatelessWidget {
                           child: NoTasksAnimatedText(),
                         ),
                       ),
-                      Lottie.asset('assets/noTasks.json',
-                              width: 300.0, height: 300.0, repeat: true,),
+                      Lottie.asset(
+                        'assets/noTasks.json',
+                        width: 200.0,
+                        height: 200.0,
+                        repeat: true,
+                        
+                      ),
+                      MotivationalQuotes(),
                     ],
                   )
                 : TasksList(),
